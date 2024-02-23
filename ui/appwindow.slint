@@ -1,0 +1,79 @@
+import { Button, VerticalBox, LineEdit, HorizontalBox } from "std-widgets.slint";
+
+
+export component AppWindow inherits Window {
+ 	title: "Policz ile poszło na VAT"; 
+	in property <string> out: "";
+
+	callback calculate_VAT(string);
+
+	width: 400px;
+    height: 360px;
+
+    GridLayout {
+		padding: 50px;
+		spacing: 15px;
+		Row {
+			Text {
+				text: "Policz VAT";
+				color: white;
+				font-size: 30px;
+				font-weight: 900;
+				horizontal-alignment: center;
+				vertical-alignment: center;
+			}
+		}
+		Row {
+			HorizontalBox {
+				padding: 20px;
+				Rectangle {
+					Text {
+						text: "Cena:";
+						color: white;
+						horizontal-alignment: center;
+						font-size: 16px;
+						padding-top: 100px;
+						vertical-alignment: center;
+						width: 100px;
+					}
+				}
+				Rectangle {
+					input_password := LineEdit {
+						enabled: true;
+						font-size: 16px;
+						width: 200px;
+						height: 32px;
+						placeholder-text: "Brutto";
+						input-type: text;
+					}
+				}
+			}
+		}
+		Row {
+			Rectangle {
+				Button {
+					text: "Policz";
+					height: 40px;
+					width: 100px;
+					clicked => {
+						calculate_VAT(input_password.text);
+					}
+				}
+			}
+		}
+		Row {
+			VerticalBox {
+				Rectangle {
+					height: 80px;
+					background: #bbb;
+					Text {
+						color: black;
+						font-size: 20px;
+						font-weight: 600;
+						text: root.out;
+					}
+				}
+			}
+		}
+	}
+}
